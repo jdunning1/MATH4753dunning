@@ -16,3 +16,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/jdunning1/MATH4753dunning
 BugReports: https://github.com/jdunning1/MATH4753dunning/issues
+RoxygenNote: 7.3.2
