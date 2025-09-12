@@ -1,11 +1,11 @@
 Package: MATH4753dunning
 Type: Package
-Title: What the Package Does (Title Case)
+Title: DESCRIPTION
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Joseph", "Dunning",
+      email = "thedestructor1500@gmail.com",
       role = c("aut", "cre")
     )
   )
@@ -14,3 +14,5 @@ Description: More about what it does (maybe more than one line).
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/jdunning1/MATH4753dunning
+BugReports: https://github.com/jdunning1/MATH4753dunning/issues
