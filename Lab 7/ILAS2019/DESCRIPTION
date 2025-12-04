@@ -1,0 +1,21 @@
+Package: ILAS2019
+Type: Package
+Title: Introduction to Multivariate statistics
+Version: 0.1.0
+Author: Wayne Stewart
+Maintainer: The package maintainer <wayne.s.stewart@ou.edu>
+Description: This package helps present introductory ideas 
+    related to PCA.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.3
+Imports: ellipse, mvtnorm
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+URL: https://github.com/MATHSTATSOU/ILAS2019
+BugReports: https://github.com/MATHSTATSOU/ILAS2019/issues
+Depends: 
+    R (>= 3.5)
+NeedsCompilation: no
+Packaged: 2023-03-16 13:32:47 UTC; Wayne Stewart

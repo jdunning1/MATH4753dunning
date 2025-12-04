@@ -1,0 +1,18 @@
+
+model {
+  # Likelihood
+  for (i in 1:n) {
+    y[i] ~ dnorm(mu[i], tau)  # Response variable follows a normal distribution
+    mu[i] <- beta0 + beta1 * x[i]  # Linear predictor
+  }
+
+  # Priors
+  beta0 ~ dnorm(0, 0.001)  # Prior for intercept (weakly informative)
+  beta1 ~ dnorm(0, 0.001)  # Prior for slope (weakly informative)
+  sigma ~ dunif(0, 100)    # Prior for standard deviation (uniform on 0 to 100)
+  tau <- 1 / (sigma * sigma)  # Precision (1/variance)
+
+  # Derived quantity (optional)
+  residual_variance <- 1 / tau
+}
+

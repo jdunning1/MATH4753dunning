@@ -1,0 +1,70 @@
+---
+title: "birthday"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Birthday}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(MATH4753dunning)
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Task 1
+## Derivation for the Probability that two or people in a class of size n share a birthday (written in LaTeX)
+$$
+S\sim Bn(n, p)
+$$
+$$
+\bar{p}(n) = 1*(1-\frac{1}{365})*(1-\frac{2}{365})*...*(1-\frac{n-1}{365})
+$$
+$$
+= \frac{365*364*...(365-n+1)}{365^n}
+$$
+$$
+= \frac{365!}{365^n(365-n)!} = \frac{_{365}P_n}{365^n}
+$$
+
+# Task 2
+## Reformulation of the probability using lfactorial and lchoose (written in LaTeX)
+$$
+^{365}P_n = n!^{365}C_n
+$$
+$$
+P\bar{A} = \frac{^{365}P_n}{365^n}
+$$
+$$
+logP(\bar{A}) = log(^{365}P_n) - nlog(365)
+$$
+$$
+= logn! + log choose(365) - nlog365
+$$
+$$
+= lfactorial(n) + 1choose(365) - nlog365
+$$
+$$
+P(A) = 1 - P(\bar{A}) = 1 - exp(logP(\bar{A}))
+$$
+$$
+= 1 - exp(lfactorial(n + lchoose(365)n - nlog365))
+$$
+
+# Task 3
+## Show the body of the function 
+```{r}
+birthday
+```
+
+# Task 4
+## Call the function using example values
+```{r}
+birthday(x = 20:25)
+```

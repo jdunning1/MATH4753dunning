@@ -1,0 +1,117 @@
+---
+title: "Lab 7"
+author: "Joey Dunning"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+      toc: yes
+      toc_float: yes
+      theme: spacelab
+      highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("lab7.R")
+```
+
+# Task 1
+```{r}
+## Get the working directory
+getwd()
+```
+
+# Task 2
+```{r, results='hide'}
+## Create four different plots by calling the mychisim function
+mychisim(n1 = 10, sigma1 = 4, mean1 = 10, iter = 1000, ymax = 0.15)
+mychisim(n1 = 20, sigma1 = 4, mean1 = 10, iter = 1000, ymax = 0.15)
+mychisim(n1 = 100, sigma1 = 4, mean1 = 10, iter = 1000, ymax = 0.15)
+mychisim(n1 = 200, sigma1 = 4, mean1 = 10, iter = 1000, ymax = 0.15)
+## Call the function mychisim with specific values and place the output into an object called chisq.
+chisq <- mychisim(n1=10, sigma1=10, mean1=2.0, iter=1500, ymax=0.15)
+## Use this output to generate a histogram
+hist(chisq$w, main = "Chi Squared Values", xlab = expression(chi^2), col = "blue")
+```
+
+# Task 3
+```{r, results='hide'}
+## Create four plots using the myTsim() function within the lab7.R. Use n1 values 10, 20, 100, and 200.
+myTsim(n1 = 10, ymax = 0.4)
+myTsim(n1 = 20, ymax = 0.4)
+myTsim(n1 = 100, ymax = 0.4)
+myTsim(n1 = 200, ymax = 0.5)
+## Call the function again but this time with new values and store the output in object T
+T <- myTsim(n1 = 10, iter = 1500, sigma1 = 10, mean1 = 20, ymax = 0.4)
+## Create a histogram using the values of w within object T
+hist(T$w, main = "T Values", xlab = "T$w", col = "blue")
+```
+
+# Task 4
+```{r, results='hide'}
+## Use the mychisim2() function to sample from two different populations instead of one
+## Call the function 4 different times with 4 different inputs
+mychisim2(n1 = 10, n2 = 10, sigma1 = 4, sigma2 = 4, mean1 = 5, mean2 = 10, iter = 1000)
+mychisim2(n1 = 20, n2 = 10, sigma1 = 10, sigma2 = 10, mean1 = 3, mean2 = 5, iter = 1000)
+mychisim2(n1 = 50, n2 = 50, sigma1 = 4, sigma2 = 4, mean1 = 5, mean2 = 10, iter = 10000)
+mychisim2(n1 = 80, n2 = 50, sigma1 = 10, sigma2 = 10, mean1 = 3, mean2 = 5, iter = 10000)
+## Use default values with iter=10000 and record the output to object F
+chisq2 <- mychisim2(iter = 10000)
+## Use this object to create another histogram
+hist(chisq2$w, main = "chisq2 Values", xlab = "chisq2$w", col = "blue")
+```
+
+# Task 5
+```{r, results='hide'}
+## Alter the function myTsim2() to place the legend where you click the mouse (using locator(1))
+## Write the student's T statistic the function calculates using LaTeX
+```
+$$T = \frac{(\bar{Y}_1-\bar{Y}_2)-(\mu_1-\mu_2)}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
+```{r, results='hide'}
+## Copy paste the code that calculates this statistic within the myTsim2() function
+### w=((ybar1-ybar2)-(mean1-mean2))/sqrt(spsq*(1/n1+1/n2))#sigma1=sigma2,  Chi square stat
+## Use the myTsim2 function to create another 4 graphs using a number of different inputs
+myTsim2(n1 = 10, n2 = 10, sigma1 = 4, sigma2 = 4, mean1 = 5, mean2 = 10, iter = 1000)
+myTsim2(n1 = 20, n2 = 10, sigma1 = 10, sigma2 = 10, mean1 = 3, mean2 = 5, iter = 1000)
+myTsim2(n1 = 50, n2 = 50, sigma1 = 4, sigma2 = 4, mean1 = 5, mean2 = 10, iter = 10000)
+myTsim2(n1 = 80, n2 = 50, sigma1 = 10, sigma2 = 10, mean1 = 3, mean2 = 5, iter = 10000)
+## Call the function with iter = 10000 and store the output in the object F
+T2 <- myTsim2(iter = 10000)
+## Use object F to make a histogram of variable F$w
+hist(T2$w, main = "T2 Values", xlab = "T2$w", col = "blue")
+```
+
+# Task 6
+```{r}
+## Write down the statistic the function will calculate using LaTeX
+```
+$$F = \left(\frac{S^2_1}{S^2_2}\right)\left(\frac{\sigma^2_2}{\sigma^2_1}\right)$$
+```{r, results='hide'}
+## What are the assumptions made in the above formula?
+### The two groups present in the dataset must be completely independent of one another
+### The two populations must have a normal distribution
+### Every sample from the dataset must be completely random
+### The S value for the second dataset cannot be zero
+### Under the null hypothesis, sigma2^2/sigma1^2 = 1
+## Use the myFsim2 function to create another 4 graphs using a number of different inputs
+myFsim2(n1 = 10, n2 = 10, sigma1 = 4, sigma2 = 4, mean1 = 5, mean2 = 10, iter = 1000)
+myFsim2(n1 = 20, n2 = 10, sigma1 = 10, sigma2 = 10, mean1 = 3, mean2 = 5, iter = 1000)
+myFsim2(n1 = 50, n2 = 50, sigma1 = 4, sigma2 = 4, mean1 = 5, mean2 = 10, iter = 10000, ymax = 2.0)
+myFsim2(n1 = 80, n2 = 50, sigma1 = 10, sigma2 = 10, mean1 = 3, mean2 = 5, iter = 10000, ymax = 2.0)
+## Call the function with iter = 10000 and store the output in the object F2
+F2 <- myTsim2(iter = 10000)
+## Use object F to make a histogram of variable F$w
+hist(F2$w, main = "F2 Values", xlab = "F2$w", col = "blue")
+```
+
+# Task 7
+```{r}
+## Read in data from FIREDAM.csv
+fire=read.csv("FIREDAM.csv")
+```
+```{r}
+## Make a new R chunk and do the following:
+library(ILAS2019)
+data("fire")
+knitr::kable(head(fire))
+```

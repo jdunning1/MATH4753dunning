@@ -1,0 +1,345 @@
+---
+title: "Lab 6"
+author: "Joey Dunning"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+      toc: yes
+      toc_float: yes
+      theme: spacelab
+      highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1
+```{r}
+## Get the working directory
+getwd()
+```
+
+# Task 2
+```{r}
+## Create a layout with 4 different plots
+layout(matrix(1:4, nr=2,nc=2))
+layout.show(4)
+
+## Plot 4 different normal curves
+## Plot the first curve
+curve(dnorm(x, mean=10,sd=4),xlim=c(-10,30))
+## Plot the second curve
+curve(dnorm(x, mean=10,sd=8),xlim=c(-10,30))
+## Plot the third curve
+curve(dnorm(x, mean=5,sd=4),xlim=c(-10,30))
+## Plot the fourth curve
+curve(dnorm(x, mean=10,sd=2),xlim=c(-10,30))
+```
+
+```{r}
+## Draw a normal curve with bounds Y∼N(0,1),P(Y≥2)
+curve(dnorm(x, mean=0,sd=1),xlim=c(-4,4))
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(2,4,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=0,sd=1)
+## Fill in the polygon with the given vertices
+polygon(c(2,xcurve,4),c(0,ycurve,0),col="Red")
+## Area
+prob=pnorm(4,mean=0,sd=1)-pnorm(2,mean=0,sd=1)
+prob=round(prob,4)
+prob
+## Click to paste the text onto the graph
+##text(locator(1), paste("Area = ", prob, sep=""))
+## Area is 0.0227
+
+## Draw a second curve with bounds Y∼N(μ=4,σ=2),P(1≤Y<5)
+curve(dnorm(x, mean=4,sd=2),xlim=c(-4,12))
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(1,5,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=4,sd=2)
+## Fill in the polygon with the given vertices
+polygon(c(1,xcurve,5),c(0,ycurve,0),col="Red")
+## Area
+prob=pnorm(5,mean=4,sd=2)-pnorm(1,mean=4,sd=2)
+prob=round(prob,4)
+prob
+## Click to paste the text onto the graph
+##text(locator(1), paste("Area = ", prob, sep=""))
+## Area is 0.6247
+
+## Draw a third curve with bounds Y∼N(μ=10,σ=4),P(Y<10)
+curve(dnorm(x, mean=10,sd=4),xlim=c(-6,26))
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(-6,10,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=10,sd=4)
+## Fill in the polygon with the given vertices
+polygon(c(-6,xcurve,10),c(0,ycurve,0),col="Red")
+## Area
+prob=pnorm(10,mean=10,sd=4)-pnorm(-6,mean=10,sd=4)
+prob=round(prob,4)
+prob
+## Click to paste the text onto the graph
+##text(locator(1), paste("Area = ", prob, sep=""))
+## Area is 0.5
+```
+
+# Task 3
+```{r}
+## Plot Gamma with bounds Y∼Gamma(shape=1,scale=1)
+curve(dgamma(x,shape=1,scale=1),xlim=c(0,10),ylim=c(0,1),col="Red",lwd=2,
+ylab="Gamma density", main="Beta=1")
+text(1,.8,paste("alpha=",1))
+curve(dgamma(x,shape=3,scale=1),xlim=c(0,10),ylim=c(0,1),add=TRUE,lwd=2)
+text(2,.3,paste("alpha=",3))
+curve(dgamma(x,shape=5,scale=1),xlim=c(0,10),ylim=c(0,1),add=TRUE, col="Blue",lwd=2)
+text(6,.2,paste("alpha=",5))
+
+## Make three new graphs with new shapes and scales, as well as a shaded region
+curve(dgamma(x,shape=3,scale=2),xlim=c(0,15),ylim=c(0,1),col="Red",lwd=2,
+ylab="Gamma density", main="Gamma(3,2)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(2,5,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dgamma(xcurve,shape=3,scale=2)
+## Fill in the polygon with the given vertices
+polygon(c(2,xcurve,5),c(0,ycurve,0),col="Red")
+## Area
+prob=pgamma(5,shape=3,scale=2)-pgamma(2,shape=3,scale=2)
+prob=round(prob,4)
+prob
+## Area is 0.3759
+
+curve(dgamma(x,shape=6,scale=3),xlim=c(0,40),ylim=c(0,.1),col="Red",lwd=2,
+ylab="Gamma density", main="Gamma(6,3)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(1,4,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dgamma(xcurve,shape=6,scale=3)
+## Fill in the polygon with the given vertices
+polygon(c(1,xcurve,4),c(0,ycurve,0),col="Red")
+## Area
+prob=pgamma(4,shape=6,scale=3)-pgamma(1,shape=6,scale=3)
+prob=round(prob,4)
+prob
+## Area is 0.0025
+
+curve(dgamma(x,shape=2,scale=4),xlim=c(0,20),ylim=c(0,.15),col="Red",lwd=2,
+ylab="Gamma density", main="Gamma(2,4)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(3,6,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dgamma(xcurve,shape=2,scale=4)
+## Fill in the polygon with the given vertices
+polygon(c(3,xcurve,6),c(0,ycurve,0),col="Red")
+## Area
+prob=pgamma(6,shape=2,scale=4)-pgamma(3,shape=2,scale=4)
+prob=round(prob,4)
+prob
+## Area is 0.2688
+```
+
+# Task 4
+```{r}
+## Create a new layout to store 4 plots
+layout(matrix(1:4, nr=2,nc=2))
+
+## Create the first plot
+curve(dchisq(x,df=1),xlim=c(0,10),ylim=c(0,1),col="Red",lwd=2,
+ylab="Chisq density", main="df=1,5")
+text(6,.6,paste("df=",1))
+## Create the second Plot
+curve(dchisq(x,df=2),xlim=c(0,10),ylim=c(0,1),col="Blue",lwd=2,
+ylab="Chisq density", main="df=2,5")
+text(6,.6,paste("df=",2))
+## Create the third plot
+curve(dchisq(x,df=4),xlim=c(0,10),ylim=c(0,1),col="Yellow",lwd=2,
+ylab="Chisq density", main="df=4,5")
+text(6,.6,paste("df=",4))
+## Create the fourth plot
+curve(dchisq(x,df=20),xlim=c(0,10),ylim=c(0,1),col="Green",lwd=2,
+ylab="Chisq density", main="df=20,5")
+text(6,.6,paste("df=",20))
+```
+
+```{r}
+## Make a plot with the bounds Y∼chisq(df=2),P(2≤Y≤4)
+curve(dchisq(x,df=2),xlim=c(0,10),ylim=c(0,1),col="Red",lwd=2,
+ylab="Chisq density", main="Chisq(2,4)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(2,4,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dchisq(xcurve,df=2)
+## Fill in the polygon with the given vertices
+polygon(c(2,xcurve,4),c(0,ycurve,0),col="Red")
+## Area
+prob=pchisq(4,df=2)-pchisq(2,df=2)
+prob=round(prob,4)
+prob
+## Area is 0.2325
+
+## Make a plot with bounds Y∼chisq(df=3),P(3≤Y≤5)
+curve(dchisq(x,df=3),xlim=c(0,10),ylim=c(0,1),col="Red",lwd=2,
+ylab="Chisq density", main="Chisq(3)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(3,5,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dchisq(xcurve,df=3)
+## Fill in the polygon with the given vertices
+polygon(c(3,xcurve,5),c(0,ycurve,0),col="Red")
+## Area
+prob=pchisq(5,df=3)-pchisq(3,df=3)
+prob=round(prob,4)
+prob
+## Area is 0.2198
+
+## Make a plot with bounds Y∼chisq(df=20),P(10<Y≤21) 
+curve(dchisq(x,df=20),xlim=c(0,40),ylim=c(0,0.1),col="Red",lwd=2,
+ylab="Chisq density", main="Chisq(20)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(10,21,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dchisq(xcurve,df=20)
+## Fill in the polygon with the given vertices
+polygon(c(10,xcurve,21),c(0,ycurve,0),col="Red")
+## Area
+prob=pchisq(21,df=20)-pchisq(10,df=20)
+prob=round(prob,4)
+prob
+## Area is 0.571
+```
+
+# Task 5
+```{r}
+## Make four plots using Weibull and record them in a layout
+layout(matrix(1:4, nr=2,nc=2))
+curve(dweibull(x,shape=1,scale=1),xlim=c(2,5),ylim=c(0,.2),col="Red",lwd=2,
+ylab="Weibull Density", main="Weibull(1,1)")
+curve(dweibull(x,shape=1,scale=2),xlim=c(2,5),ylim=c(0,.2),col="Blue",lwd=2,
+ylab="Weibull Density", main="Weibull(1,2)")
+curve(dweibull(x,shape=2,scale=4),xlim=c(2,5),ylim=c(0,.3),col="Yellow",lwd=2,
+ylab="Weibull Density", main="Weibull(2,4)")
+curve(dweibull(x,shape=4,scale=8),xlim=c(2,5),ylim=c(0,.3),col="Green",lwd=2,
+ylab="Weibull Density", main="Weibull(4,8)")
+```
+
+```{r}
+## Create 3 plots with Weibull and shade and plot the areas
+## Plot Weibull with bounds Y∼Weibull(shape=2,scale=2),(1<Y<2)
+curve(dweibull(x,shape=2,scale=2),xlim=c(0,5),ylim=c(0,0.5),col="Red",lwd=2,
+ylab="Weibull density", main="Weibull(2,2)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(1,2,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dweibull(xcurve,shape=2,scale=2)
+## Fill in the polygon with the given vertices
+polygon(c(1,xcurve,2),c(0,ycurve,0),col="Red")
+## Area
+prob=pweibull(2,shape=2,scale=2)-pweibull(1,shape=2,scale=2)
+prob=round(prob,4)
+prob
+## Probability is 0.4109
+
+## Plot Weibull with bounds Y∼Weibull(shape=3,scale=3),(2<Y<3)
+curve(dweibull(x,shape=3,scale=3),xlim=c(0,5),ylim=c(0,0.5),col="Red",lwd=2,
+ylab="Weibull density", main="Weibull(3,3)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(2,3,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dweibull(xcurve,shape=3,scale=3)
+## Fill in the polygon with the given vertices
+polygon(c(2,xcurve,3),c(0,ycurve,0),col="Red")
+## Area
+prob=pweibull(3,shape=3,scale=3)-pweibull(2,shape=3,scale=3)
+prob=round(prob,4)
+prob
+## Probability is 0.3757
+
+## Plot Weibull with bounds Y∼Weibull(shape=6,scale=6),(5<Y<10)
+curve(dweibull(x,shape=6,scale=6),xlim=c(0,10),ylim=c(0,0.5),col="Red",lwd=2,
+ylab="Weibull density", main="Weibull(6,6)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(5,10,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dweibull(xcurve,shape=6,scale=6)
+## Fill in the polygon with the given vertices
+polygon(c(5,xcurve,10),c(0,ycurve,0),col="Red")
+## Area
+prob=pweibull(10,shape=6,scale=6)-pweibull(5,shape=6,scale=6)
+prob=round(prob,4)
+prob
+## Probability is 0.7154
+```
+
+# Task 6
+```{r}
+## Use ?dbeta to learn about the dbeta command
+## Repeat Task 5 but using Beta instead of Weibull
+## Make four plots using Beta and record them in a layout
+layout(matrix(1:4, nr=2,nc=2))
+curve(dbeta(x,shape1=1,shape2=1),xlim=c(0,1),ylim=c(0,2),col="Red",lwd=2,
+ylab="Beta Density", main="Beta(1,1)")
+curve(dbeta(x,shape1=1,shape2=2),xlim=c(0,1),ylim=c(0,2),col="Blue",lwd=2,
+ylab="Beta Density", main="Beta(1,2)")
+curve(dbeta(x,shape1=2,shape2=4),xlim=c(0,1),ylim=c(0,3),col="Yellow",lwd=2,
+ylab="Beta Density", main="Beta(2,4)")
+curve(dbeta(x,shape1=4,shape2=8),xlim=c(0,1),ylim=c(0,3),col="Green",lwd=2,
+ylab="Beta Density", main="Beta(4,8)")
+```
+
+```{r}
+## Create 3 plots with Beta and shade and plot the areas
+## Plot Beta with bounds Y∼Beta(shape=2,scale=2),(.1<Y<.2)
+curve(dbeta(x,shape1=2,shape2=2),xlim=c(0,1),ylim=c(0,2),col="Red",lwd=2,
+ylab="Beta density", main="Beta(2,2)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(0.1,0.2,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dbeta(xcurve,shape1=2,shape2=2)
+## Fill in the polygon with the given vertices
+polygon(c(0.1,xcurve,0.2),c(0,ycurve,0),col="Red")
+## Area
+prob=pbeta(0.2,shape1=2,shape2=2)-pbeta(0.1,shape1=2,shape2=2)
+prob=round(prob,4)
+prob
+## Probability is 0.076
+
+## Plot Beta with bounds Y∼Beta(shape=3,scale=3),(.2<Y<.3)
+curve(dbeta(x,shape1=3,shape2=3),xlim=c(0,1),ylim=c(0,2),col="Red",lwd=2,
+ylab="Beta density", main="Beta(3,3)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(0.2,0.3,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dbeta(xcurve,shape1=3,shape2=3)
+## Fill in the polygon with the given vertices
+polygon(c(0.2,xcurve,0.3),c(0,ycurve,0),col="Red")
+## Area
+prob=pbeta(0.3,shape1=3,shape2=3)-pbeta(0.2,shape1=3,shape2=3)
+prob=round(prob,4)
+prob
+## Probability is 0.1052
+
+## Plot Beta with bounds Y∼Beta(shape=6,scale=6),(.5<Y<1)
+curve(dbeta(x,shape1=6,shape2=6),xlim=c(0,1),ylim=c(0,3),col="Red",lwd=2,
+ylab="Beta density", main="Beta(6,6)")
+## x values corresponding to the x - cords of points on the curve
+xcurve=seq(0.5,1,length=1000)
+## Y values corresponding t0 the x values
+ycurve=dbeta(xcurve,shape1=6,shape2=6)
+## Fill in the polygon with the given vertices
+polygon(c(0.5,xcurve,1),c(0,ycurve,0),col="Red")
+## Area
+prob=pbeta(1,shape1=6,shape2=6)-pbeta(0.5,shape1=6,shape2=6)
+prob=round(prob,4)
+prob
+## Probability is 0.5
+```
+
+# Task 7
+```{r}
+## Create 3 separate tests to test each variable and make sure it returns the correct probability
+MATH4753dunning::myncurve(mu=10,sigma=5, a=6)
+```
